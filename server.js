@@ -30,7 +30,7 @@ app.get("/test-wa", async (req, res) => {
             message: "Test WA dari server 🚀"
         }, {
             headers: {
-                Authorization: "uSbMYhkBRf2kjV3w6yqC"
+                Authorization: "dNnddRHMv4BUGoXnbLFY"
             }
         });
 
