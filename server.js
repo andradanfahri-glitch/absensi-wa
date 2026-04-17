@@ -54,7 +54,7 @@ app.post("/kirim", async (req, res) => {
             image: foto
         }, {
             headers: {
-                Authorization: "uSbMYhkBRf2kjV3w6yqC"
+                Authorization: "dNnddRHMv4BUGoXnbLFY"
             }
         });
 
