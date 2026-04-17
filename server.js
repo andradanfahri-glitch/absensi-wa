@@ -21,11 +21,11 @@ app.get("/kirim", (req, res) => {
 });
 
 // ======================
-// TEST WHATSAPP LANGSUNG
+// TEST WHATSAPP
 // ======================
 app.get("/test-wa", async (req, res) => {
     try {
-        await axios.post("https://api.fonnte.com/send", {
+        const result = await axios.post("https://api.fonnte.com/send", {
             target: "6285784117242",
             message: "Test WA dari server 🚀"
         }, {
@@ -34,23 +34,31 @@ app.get("/test-wa", async (req, res) => {
             }
         });
 
-        res.send("WA berhasil dikirim!");
+        res.json(result.data);
+
     } catch (error) {
         console.log(error.response?.data || error.message);
-        res.send("Error: " + (error.response?.data?.reason || error.message));
+        res.json(error.response?.data || error.message);
     }
 });
 
 // ======================
-// KIRIM DARI WEBSITE
+// KIRIM ABSENSI + GPS
 // ======================
 app.post("/kirim", async (req, res) => {
-    const { nama, nip, foto } = req.body;
+    const { nama, nip, foto, lokasi } = req.body;
 
     try {
+        const pesan = `
+Absensi Karyawan
+Nama: ${nama}
+NIP: ${nip}
+Lokasi: ${lokasi || "Tidak tersedia"}
+        `;
+
         await axios.post("https://api.fonnte.com/send", {
             target: "6285784117242",
-            message: `Absensi Karyawan\nNama: ${nama}\nNIP: ${nip}`,
+            message: pesan,
             image: foto
         }, {
             headers: {
